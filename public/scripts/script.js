@@ -484,7 +484,7 @@ function search(location) {
 
 async function saveSnapshot(userID, lat, lon, weather) {
   // Send data to the server using fetch or another AJAX library
-  const response = await fetch("http://localhost:3000/saveData", {
+  const response = await fetch("/saveData", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -499,7 +499,7 @@ async function saveSnapshot(userID, lat, lon, weather) {
 async function findSnapshots(userID) {
   try {
     // Make a GET request to the endpoint using fetch
-    const response = await fetch(`http://localhost:3000/getData/${userID}`);
+    const response = await fetch(`/getData/${userID}`);
 
     // Check if the request was successful (status code 200)
     if (response.ok) {
