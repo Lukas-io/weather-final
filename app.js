@@ -6,6 +6,20 @@ const User = require("./model");
 const app = express();
 const PORT = 3000;
 
+app.set("view engine", "ejs");
+app.use(express.static("public"));
+
+app.get("/", (req, res) => {
+  res.render("signin");
+});
+app.get("/signup", (req, res) => {
+  res.render("signup");
+});
+
+app.get("/dashboard", (req, res) => {
+  res.render("dashboard");
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
@@ -13,10 +27,7 @@ app.listen(PORT, () => {
 const MONGO_URI =
   "mongodb+srv://lukasiou:pkvRxAen70GXKySW@cluster0.umptrp1.mongodb.net/weather-user";
 
-mongoose.connect(MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(MONGO_URI);
 
 const db = mongoose.connection;
 
@@ -50,7 +61,7 @@ app.get("/getData/:userID", async (req, res) => {
     const user = req.params.userID;
 
     // Find documents with the specified userID
-    const occurrences = await User.find({userID: user});
+    const occurrences = await User.find({ userID: user });
 
     // Do something with the occurrences
     console.log("Occurrences:", occurrences);
